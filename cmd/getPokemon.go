@@ -6,10 +6,11 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+	"strings"
 
+	"github.com/sgmccullough/pokeapi-go"
 	"github.com/spf13/cobra"
-
-	"github.com/sgmccullough/PokeAssist/cmd/helper"
 )
 
 // getPokemonCmd represents the getPokemon command
@@ -22,8 +23,14 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("getPokemon called")
+		l, err := pokeapi.Pokemon(strings.ToLower(args[0]))
+		if err != nil {
+			log.Fatalln(err)
+		}
+		fmt.Println(l)
 	},
 }
 
@@ -39,6 +46,4 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// getPokemonCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
-	helper.MakeRequest()
 }
