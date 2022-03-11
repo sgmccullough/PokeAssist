@@ -3,7 +3,7 @@ module PokeAssist
 go 1.17
 
 require (
-	github.com/sgmccullough/pokeapi-go v1.4.1-0.20220311003234-68eeb92d578d
+	github.com/sgmccullough/pokeapi-go v1.4.1-0.20220311023028-b9e6775cdf1d
 	github.com/spf13/cobra v1.4.0
 )
 

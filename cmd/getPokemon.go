@@ -25,12 +25,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("getPokemon called")
-		l, err := pokeapi.Pokemon(strings.ToLower(args[0]))
-		if err != nil {
-			log.Fatalln(err)
-		}
-		fmt.Println(l)
+		getPokemon(args[0])
 	},
 }
 
@@ -46,4 +41,16 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// getPokemonCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func getPokemon(pokemon string) {
+	l, err := pokeapi.Pokemon(strings.ToLower(pokemon))
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Print("Types: ")
+	for s := range l.Types {
+		fmt.Print(l.Types[s].Type.Name, " ")
+	}
+	fmt.Println()
 }
